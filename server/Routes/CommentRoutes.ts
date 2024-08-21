@@ -1,0 +1,10 @@
+import express from "express";
+import CreateComment from "../controller/Comment/AddComment";
+import DeleteComment from "../controller/Comment/DeleteComment";
+import VerifyLogin from "../middleware/verifyjwt";
+
+const CommentRouter = express.Router();
+CommentRouter.post("/create", VerifyLogin, CreateComment);
+CommentRouter.delete("/delete/:_id", VerifyLogin, DeleteComment);
+
+export default CommentRouter;

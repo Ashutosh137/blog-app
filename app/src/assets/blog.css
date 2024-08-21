@@ -1,0 +1,131 @@
+/* blog-container.css */
+.blog-container {
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #1e293b; /* Dark slate background */
+  color: #e2e8f0; /* Light text color */
+  border-radius: 12px; /* Rounded corners */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease-in-out; /* Smooth transition */
+}
+
+.blog-container:hover {
+  transform: translateY(-5px); /* Lift effect */
+}
+
+.blog-container h2 {
+  font-size: 2rem;
+  color: #38bdf8; /* Bright blue for headings */
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #475569; /* Underline effect */
+  padding-bottom: 0.5rem;
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.blog-container h2:hover {
+  color: #7dd3fc;
+}
+
+.blog-container p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 0.5rem;
+  text-align: justify; /* Justified text */
+}
+
+.blog-container ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.blog-container li {
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  position: relative;
+  color: #94a3b8; /* Lighter gray */
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.blog-container li::before {
+  content: "•"; /* Custom bullet points */
+  position: absolute;
+  left: 0;
+  color: #38bdf8; /* Bright blue for bullet points */
+  font-size: 1.2rem;
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.blog-container li:hover::before {
+  color: #7dd3fc; /* Lighter blue on hover */
+}
+
+.blog-container code {
+  background-color: #334155; /* Dark background for inline code */
+  color: #38bdf8; /* Bright blue text */
+  padding: 0.2rem 0.4rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.blog-container code:hover {
+  background-color: #475569; /* Darker background on hover */
+}
+
+.blog-container a {
+  color: #38bdf8; /* Bright blue for links */
+  text-decoration: underline;
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.blog-container a:hover {
+  color: #7dd3fc; /* Lighter blue on hover */
+}
+
+.blog-container blockquote {
+  border-left: 5px solid #475569;
+  background-color: #334155;
+  color: #cbd5e1;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  font-style: italic;
+  border-radius: 8px;
+  position: relative;
+  transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.blog-container blockquote::before {
+  content: "“";
+  font-size: 4rem;
+  color: #475569; /* Accent color for blockquote */
+  position: absolute;
+  left: 1rem;
+  top: 0.5rem;
+  opacity: 0.2;
+}
+
+.blog-container blockquote:hover {
+  background-color: #475569; /* Darker background on hover */
+  color: #e2e8f0; /* Lighter text color on hover */
+}
+
+.blog-container strong {
+  color: #f8fafc; /* Lighter color for strong emphasis */
+}
+
+@media (max-width: 768px) {
+  .blog-container {
+    padding: 1rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Reduced shadow on small screens */
+  }
+
+  .blog-container h2 {
+    font-size: 1.5rem; /* Smaller headings on mobile */
+  }
+
+  .blog-container p,
+  .blog-container li,
+  .blog-container code {
+    font-size: 1rem; /* Smaller font size on mobile */
+  }
+}

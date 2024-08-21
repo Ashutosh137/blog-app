@@ -1,0 +1,125 @@
+/* comment.css */
+.comment-container {
+    margin: 0 auto;
+    padding: 1rem;
+    color: #e2e8f0; 
+    border-radius: 8px; /* Rounded corners */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all 0.3s ease-in-out; /* Smooth transition */
+}
+
+
+.comment-container h3 {
+    font-size: 1.5rem;
+    color: #38bdf8;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #475569; /* Underline effect */
+    padding-bottom: 0.25rem;
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.comment-container h3:hover {
+    color: #7dd3fc; /* Lighter blue on hover */
+}
+
+.comment-container p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    text-align: justify; /* Justified text */
+}
+
+.comment-container ol {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.comment-container li {
+    margin-bottom: 0.6rem;
+    padding-left: 1rem;
+    position: relative;
+    color: #94a3b8; /* Lighter gray */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.comment-container li::before {
+    content: "•"; /* Custom bullet points */
+    position: absolute;
+    left: 0;
+    color: #38bdf8; /* Bright blue for bullet points */
+    font-size: 1rem;
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.comment-container li:hover::before {
+    color: #7dd3fc; /* Lighter blue on hover */
+}
+
+.comment-container code {
+    background-color: #334155; /* Dark background for inline code */
+    color: #38bdf8; /* Bright blue text */
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.comment-container code:hover {
+    background-color: #475569; /* Darker background on hover */
+}
+
+.comment-container a {
+    color: #38bdf8; /* Bright blue for links */
+    text-decoration: underline;
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.comment-container a:hover {
+    color: #7dd3fc; /* Lighter blue on hover */
+}
+
+.comment-container blockquote {
+    border-left: 4px solid #475569;
+    background-color: #334155;
+    color: #cbd5e1;
+    margin: 1rem 0;
+    padding: 0.8rem;
+    font-style: italic;
+    border-radius: 6px;
+    position: relative;
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.comment-container blockquote::before {
+    content: "“";
+    font-size: 3rem;
+    color: #475569; /* Accent color for blockquote */
+    position: absolute;
+    left: 0.8rem;
+    top: 0.4rem;
+    opacity: 0.2;
+}
+
+.comment-container blockquote:hover {
+    background-color: #475569; /* Darker background on hover */
+    color: #e2e8f0; /* Lighter text color on hover */
+}
+
+.comment-container strong {
+    color: #f8fafc; /* Lighter color for strong emphasis */
+}
+
+@media (max-width: 768px) {
+    .comment-container {
+        padding: 0.75rem;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Reduced shadow on small screens */
+    }
+
+    .comment-container h3 {
+        font-size: 1.25rem; /* Smaller headings on mobile */
+    }
+
+    .comment-container p, .comment-container li, .comment-container code {
+        font-size: 0.9rem; /* Smaller font size on mobile */
+    }
+}
