@@ -1,15 +1,11 @@
-FROM node:20-alpine
+FROM node:18-alpine
 
-WORKDIR /app
-
-COPY package*.json ./
-
-RUN npm install
+WORKDIR /server
 
 COPY . .
 
-# Expose the port the app runs on
-EXPOSE 4000:4000
+RUN npm install
 
-# Define the command to run the app
+EXPOSE 4000
+
 CMD ["npm", "start"]

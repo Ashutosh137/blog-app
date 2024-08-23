@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:4000";
+const baseURL = "https://blog-app-rqhr.onrender.com/";
 const axiosInstance = axios.create({
   baseURL,
-  timeout: 10000,
+  timeout: 65000,
   headers: {
-    'Cache-Control': ' must-revalidate',
-    'Pragma': 'no-cache',
-    'Expires': '0',
+    "Cache-Control": "cache",
+    Pragma: "no-cache",
+    Expires: "1",
   },
 });
 

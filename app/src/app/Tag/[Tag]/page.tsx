@@ -6,7 +6,6 @@ export default async function Page({ params }: { params: any }) {
     const { Tag } = params
     const response = await axiosInstance.get(`/blog/tag/${Tag}`)
     const { blogPost } = response.data
-    console.log(blogPost)
     return (
         <div className="min-h-screen bg-gray-900 text-gray-100">
             <div className="container mx-auto p-6">
@@ -30,4 +29,6 @@ export default async function Page({ params }: { params: any }) {
             </div>
         </div>
     )
+
+
 }

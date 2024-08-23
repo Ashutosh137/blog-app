@@ -12,6 +12,8 @@ async function Page() {
             <BlogsGroup BlogPost={BlogPost} />
         </div>
     )
+
+
 }
 
 export default Page
