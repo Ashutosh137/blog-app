@@ -1,8 +1,6 @@
 "use client";
+import { axiosInstance } from "@/Axios/config";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-const API_URL = "http://localhost:4000/auth";
 
 interface AuthState {
   userdata: any;
@@ -27,7 +25,7 @@ export const login = createAsyncThunk(
     thunkAPI
   ) => {
     try {
-      const response = await axios.post(`${API_URL}/login`, {
+      const response = await axiosInstance.post(`auth/login`, {
         email,
         password,
       });
@@ -52,7 +50,7 @@ export const register = createAsyncThunk(
     thunkAPI
   ) => {
     try {
-      const response = await axios.post(`${API_URL}/register`, {
+      const response = await axiosInstance.post(`auth/register`, {
         email,
         password,
         name,
@@ -72,7 +70,7 @@ export const fetchUser = createAsyncThunk(
     console.log(token);
 
     try {
-      const response = await axios.get(`${API_URL}/user`, {
+      const response = await axiosInstance.get(`auth/user`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
