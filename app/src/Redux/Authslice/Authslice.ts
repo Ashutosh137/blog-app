@@ -1,6 +1,7 @@
 "use client";
 import { axiosInstance } from "@/Axios/config";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 interface AuthState {
   userdata: any;
@@ -29,12 +30,14 @@ export const login = createAsyncThunk(
         email,
         password,
       });
+      toast.success("User Login successfully")
 
       const { token, user } = response.data;
       return { token, user };
     } catch (error: any) {
-      console.log(error);
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return thunkAPI.rejectWithValue(
+        error.response.data.error || error.response.data.message
+      );
     }
   }
 );
@@ -55,9 +58,13 @@ export const register = createAsyncThunk(
         password,
         name,
       });
+
+      toast.success("User registered successfully")
+      
       const { token } = response.data;
       return { token };
     } catch (error: any) {
+      console.log(error)
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
@@ -67,7 +74,6 @@ export const fetchUser = createAsyncThunk(
   "auth/fetchUser",
   async (_, thunkAPI) => {
     const token = localStorage.getItem("token");
-    console.log(token);
 
     try {
       const response = await axiosInstance.get(`auth/user`, {
@@ -75,10 +81,11 @@ export const fetchUser = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response.data);
       return response.data.user;
     } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.response.data);
+      return thunkAPI.rejectWithValue(
+        error.response.data.error || error.response.data.message
+      );
     }
   }
 );

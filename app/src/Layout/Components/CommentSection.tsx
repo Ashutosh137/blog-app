@@ -52,7 +52,6 @@ const CommentSection: React.FC<CommentSectionProps> = ({ blogId, comments }) => 
 
             <div className="mb-8">
                 <ReactQuill
-                    // theme='snow'
                     value={newComment}
                     onChange={handleChange}
                     className="mb-4 border border-gray-600 rounded-lg shadow-md"
@@ -66,7 +65,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ blogId, comments }) => 
 
             <ul>
                 {comments.length === 0 ? (
-                    <p className="text-gray-400">No comments yet.</p>
+                    <p className="text-gray-400 text-center">No comments yet.</p>
                 ) : (
                     comments.map((comment) => (
                         <Comments comment={comment} key={comment._id} />

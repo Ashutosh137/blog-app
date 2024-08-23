@@ -1,4 +1,5 @@
 import { axiosInstance } from '@/Axios/config'
+import Link from 'next/link';
 import React from 'react'
 
 async function Users({ userid }: { userid: string; }) {
@@ -14,7 +15,7 @@ async function Users({ userid }: { userid: string; }) {
             />
             <div className="text-gray-100 my-auto">
                 <h1 className="text-lg font-semibold capitalize">{name}</h1>
-                <p className="text-gray-400 text-sm">Profile</p>
+                <Link href={`/Profile/${userid}`} className="text-gray-400 text-sm">Profile</Link>
             </div>
         </div>
     )

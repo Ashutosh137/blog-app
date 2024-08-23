@@ -5,6 +5,6 @@ import VerifyLogin from "../middleware/verifyjwt";
 
 const CommentRouter = express.Router();
 CommentRouter.post("/create", VerifyLogin, CreateComment);
-CommentRouter.delete("/delete/:_id", VerifyLogin, DeleteComment);
+CommentRouter.delete("/delete/:commentId", VerifyLogin, DeleteComment);
 
 export default CommentRouter;

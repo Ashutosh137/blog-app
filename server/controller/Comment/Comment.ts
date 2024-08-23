@@ -6,7 +6,7 @@ import * as yup from "yup";
 const paramsSchema = yup.object().shape({
   _id: yup
     .string()
-    .required("blogId is required as params")
+    .required("userID is required as params")
     .test("is-mongo-objectid", "Invalid Blog ID format", (value) =>
       mongoose.Types.ObjectId.isValid(value)
     ),

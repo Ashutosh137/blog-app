@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "https://blog-app-rqhr.onrender.com/";
+const baseURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/";
 const axiosInstance = axios.create({
   baseURL,
   timeout: 65000,

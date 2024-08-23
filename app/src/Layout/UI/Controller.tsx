@@ -7,10 +7,12 @@ import Button from '../../UI/button'
 import { MdDelete } from 'react-icons/md'
 import { CgEditBlackPoint } from 'react-icons/cg'
 import CreateBlog from '../Components/CreateBlog'
+import { useRouter } from 'next/navigation'
 
 function Controller({ Blog }: { Blog: Blog }) {
     const { isLogin, userdata } = useSelector((state: RootState) => state.auth)
     const dispatch = useDispatch<AppDispatch>()
+    const navigate=useRouter()
 
     const [Edit, setEdit] = useState(false)
     const [Delete, setDelete] = useState(false)
@@ -18,6 +20,8 @@ function Controller({ Blog }: { Blog: Blog }) {
     const handleDelete = () => {
         dispatch(DeleteBlog(Blog._id))
         handleDeleteToggle()
+        navigate.push("Blog")
+
     }
 
     const handleEdit = () => {
@@ -38,8 +42,8 @@ function Controller({ Blog }: { Blog: Blog }) {
             }
 
             {Edit && (
-                <div className='fixed w-screen backdrop-blur-sm h-screen overflow-y-scroll  inset-0 flex justify-center items-center z-50'>
-                    <div className="p-2 sm:p-6 mx-auto max-w-3xl rounded-lg h-full ">
+                <div className='fixed w-screen backdrop-blur-3xl h-screen overflow-y-scroll inset-0 flex justify-center items-center z-50'>
+                    <div className="p-2 sm:p-6  min-w-3xl rounded-lg h-full ">
                         <CreateBlog Toggle={() => setEdit(false)} Blog={Blog} Edit />
                     </div>
                 </div>

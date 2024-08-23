@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RootState } from "../store";
 import { axiosInstance } from "@/Axios/config";
+import toast from "react-hot-toast";
 
 interface CommentState {
   comments: any[];
@@ -39,8 +40,9 @@ export const DeleteComment = createAsyncThunk(
       const response = await axiosInstance.delete(`comment/delete/${_id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
-        }
+        },
       });
+      toast.success("comment Deleted successfully");
       return response.data;
     } catch (error: any) {
       console.log(error);
@@ -66,6 +68,7 @@ export const createComment = createAsyncThunk(
           },
         }
       );
+      toast.success("comment Added successfully");
       return response.data;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.response.data);

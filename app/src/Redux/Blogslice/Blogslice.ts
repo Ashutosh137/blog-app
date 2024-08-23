@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RootState } from "../store";
 import { axiosInstance } from "@/Axios/config";
+import toast from "react-hot-toast";
 
 const API_URL = "http://localhost:4000/blog";
 export interface Blog {
@@ -77,9 +78,11 @@ export const EditBlog = createAsyncThunk(
           },
         }
       );
+      toast.success("Blog Edited Succesfullly");
       return response.data;
     } catch (error: any) {
       console.log(error);
+      toast.error("Error on Creating Blog");
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -108,6 +111,7 @@ export const DeleteBlog = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
+      toast.success("Dlog Deleted ")
       return response.data;
     } catch (error: any) {
       console.log(error);

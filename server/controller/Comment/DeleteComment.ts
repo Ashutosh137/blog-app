@@ -14,9 +14,9 @@ const bodySchema = yup.object().shape({
 
 const DeleteComment = async (req: Request, res: Response) => {
   try {
-    await bodySchema.validate(req.body, { abortEarly: false });
+    await bodySchema.validate(req.params, { abortEarly: false });
 
-    const { commentId } = req.body;
+    const { commentId } = req.params;
 
     const deletedComment = await CommentBlog.findByIdAndDelete(commentId);
 

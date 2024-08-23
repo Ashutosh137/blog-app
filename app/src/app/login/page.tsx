@@ -8,12 +8,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { login } from '@/Redux/Authslice/Authslice'
 import Error from '@/UI/Error'
 import { useRouter } from 'next/navigation'
+import Loading from '@/UI/loading'
 
 function Page() {
   const [Email, setEmail] = useState("")
   const [Password, setPassword] = useState("")
   const navigate = useRouter()
-  const { error, isLogin } = useSelector((state: RootState) => state.auth)
+  const { error, isLogin, status } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch<AppDispatch>()
   const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -27,8 +28,9 @@ function Page() {
   }, [isLogin])
 
   return (
-    <div className="max-w-screen-lg mx-auto mt-5">
+    <div className="max-w-screen-lg mx-auto  border border-primary p-5 py-10 rounded-md mt-5">
       <Heading label='login' />
+      {status === "loading" && <Loading/>}
       <form onSubmit={handleLogin} className='p-2 container max-w-screen-sm mx-auto'>
         <Error error={error as string} />
         <Input label='email' type='email' onChange={(e) => setEmail(e.target.value)} value={Email} />
