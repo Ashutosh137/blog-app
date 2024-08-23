@@ -7,9 +7,9 @@ import { Blog } from '@/Redux/Blogslice/Blogslice';
 
 function BlogContainer({ blog }: { blog: Blog }) {
     return (
-        <article className="max-w-5xl mx-auto py-12 px-2 sm:px-4">
-            <div className=" rounded-lg  space-y-6">
-                <h1 className="text-[1.5rem] sm:text-[2.5rem] px-4 sm:px-8  font-extrabold text-pretty text-primary mb-4">
+        <article className="max-w-5xl border border-gray-700 shadow-sm rounded-md my-5 mx-auto py-12 px-2 sm:px-4">
+            <div className=" rounded-lg space-y-6">
+                <h1 className="text-[1.5rem] sm:text-[2.5rem] border-b-4 border-primary mx-4 sm:mx-8 pb-2  font-extrabold text-pretty text-primary mb-4">
                     {blog.title}
                 </h1>
 

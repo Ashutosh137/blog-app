@@ -1,7 +1,8 @@
 /* comment.css */
 .comment-container {
     margin: 0 auto;
-    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 0.1rem;
     color: #e2e8f0; 
     border-radius: 8px; /* Rounded corners */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

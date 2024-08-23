@@ -5,13 +5,9 @@ import { useSelector } from 'react-redux'
 import CreateBlog from './CreateBlog'
 
 function EditBlog() {
-    const {blog}= useSelector((state:RootState)=>state.blog)
-
-
-
-
+  const { blog } = useSelector((state: RootState) => state.blog)
   return (
-    <div><CreateBlog Edit={true} Blog={blog}/></div>
+    <CreateBlog Edit={true} Blog={blog} />
   )
 }
 
