@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Blog from "../../models/Blog";
 import * as yup from "yup";
 import mongoose from "mongoose";
+import CommentBlog from "../../models/Comment";
 
 const paramsSchema = yup.object().shape({
   _id: yup
@@ -23,6 +24,8 @@ const DeleteBlog = async (req: Request, res: Response) => {
     if (!blogPost) {
       return res.status(404).json({ message: "Blog post not found" });
     }
+
+    await CommentBlog.deleteMany({ BlogPost: _id });
 
     return res.status(200).json({ message: "Blog post deleted successfully" });
   } catch (error: any) {
