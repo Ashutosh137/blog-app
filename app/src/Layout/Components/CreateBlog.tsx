@@ -2,7 +2,7 @@
 import React, { FormEvent, useState } from 'react';
 import Button from '@/UI/button';
 import Heading from '@/UI/heading';
-import { createBlog, EditBlog } from '@/Redux/Blogslice/Blogslice';
+import { createBlog, editBlog } from '@/Redux/Blogslice/Blogslice';
 import { AppDispatch, RootState } from '@/Redux/store';
 import 'react-quill/dist/quill.snow.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,7 +36,7 @@ function CreateBlog({ Edit, Blog, Toggle }: { Edit?: boolean, Blog?: any, Toggle
                         title: title,
                         _id: Blog._id
                     }
-                    dispatch(EditBlog(UpdatedBlog))
+                    dispatch(editBlog(UpdatedBlog))
                     Toggle && Toggle()
                 }
                 resetForm();

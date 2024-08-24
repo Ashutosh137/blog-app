@@ -1,9 +1,9 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@/UI/button';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/Redux/store';
-import { createComment } from '@/Redux/Commentslice/commentslice';
+import { Comment, createComment, fetchComments } from '@/Redux/Commentslice/commentslice';
 import 'react-quill/dist/quill.snow.css';
 import toast from 'react-hot-toast';
 import Comments from '../UI/Comments';
@@ -11,28 +11,24 @@ import dynamic from 'next/dynamic';
 
 const ReactQuill = dynamic(() => import("react-quill"))
 
-export interface Comment {
-    _id: string;
-    author: string;
-    text: string;
-    created_at: string;
-    postedby: string;
-}
-
 interface CommentSectionProps {
-    comments: Comment[];
     blogId: string;
 }
 
-const CommentSection: React.FC<CommentSectionProps> = ({ blogId, comments }) => {
+const CommentSection: React.FC<CommentSectionProps> = ({ blogId }) => {
     const [newComment, setNewComment] = useState("");
     const dispatch = useDispatch<AppDispatch>();
     const { isLogin } = useSelector((state: RootState) => state.auth);
+    const { comments } = useSelector((state: RootState) => state.comment);
+
+    useEffect(() => {
+        dispatch(fetchComments(blogId))
+    }, [dispatch, blogId])
 
     const handleAddComment = () => {
         if (newComment.trim()) {
             if (isLogin) {
-                dispatch(createComment({ blogId, comment: newComment.trim() }));
+                dispatch(createComment({ blogId, content: newComment.trim() }));
                 setNewComment("");
             } else {
                 toast.error("Please Login Again")

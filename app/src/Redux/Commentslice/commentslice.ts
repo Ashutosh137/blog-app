@@ -1,14 +1,21 @@
 "use client";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import { RootState } from "../store";
 import { axiosInstance } from "@/Axios/config";
 import toast from "react-hot-toast";
 
 interface CommentState {
-  comments: any[];
+  comments: Comment[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
+}
+
+export interface Comment {
+  _id: string;
+  text: string;
+  postedby: string;
+  BlogPost: string;
+  created_at: string;
 }
 
 const initialState: CommentState = {
@@ -17,64 +24,55 @@ const initialState: CommentState = {
   error: null,
 };
 
-// Fetch comments for a specific blog post
-export const fetchComments = createAsyncThunk(
-  "comments/fetchComments",
-  async (blogId: string, thunkAPI) => {
-    try {
-      const response = await axiosInstance.get(`comment/${blogId}`, {});
-      return response.data;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
+export const fetchComments = createAsyncThunk<
+  Comment[],
+  string,
+  { state: RootState }
+>("comments/fetchComments", async (blogId, thunkAPI) => {
+  try {
+    const response = await axiosInstance.get(`/blog/${blogId}/comments`);
+    return response.data.comments;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error.response.data);
   }
-);
+});
 
-export const DeleteComment = createAsyncThunk(
-  "Comments/DeleteComment",
-  async (_id: any, thunkAPI) => {
-    const state = thunkAPI.getState() as RootState;
-    const token = state.auth.userdata.token;
+export const deleteComment = createAsyncThunk<
+  void,
+  string,
+  { state: RootState }
+>("comments/deleteComment", async (commentId, thunkAPI) => {
+  const { token } = thunkAPI.getState().auth.userdata;
 
-    try {
-      const response = await axiosInstance.delete(`comment/delete/${_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      toast.success("comment Deleted successfully");
-      return response.data;
-    } catch (error: any) {
-      console.log(error);
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
+  try {
+    await axiosInstance.delete(`/comment/delete/${commentId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    toast.success("Comment deleted successfully");
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error.response.data);
   }
-);
+});
 
-// Create comment
-export const createComment = createAsyncThunk(
-  "comments/createComment",
-  async ({ blogId, comment }: { blogId: string; comment: any }, thunkAPI) => {
-    const state = thunkAPI.getState() as RootState;
-    const { _id, token } = state.auth.userdata;
+export const createComment = createAsyncThunk<
+  Comment,
+  { blogId: string; content: string },
+  { state: RootState }
+>("comments/createComment", async ({ blogId, content }, thunkAPI) => {
+  const { _id, token } = thunkAPI.getState().auth.userdata;
 
-    try {
-      const response = await axiosInstance.post(
-        `comment/create`,
-        { content: comment, BlogPost: blogId, postedBy: _id },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      toast.success("comment Added successfully");
-      return response.data;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
+  try {
+    const response = await axiosInstance.post(
+      `/comment/create`,
+      { content, BlogPost: blogId, postedBy: _id },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    toast.success("Comment added successfully");
+    return response.data.comment;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error.response.data);
   }
-);
+});
 
 const commentSlice = createSlice({
   name: "comments",

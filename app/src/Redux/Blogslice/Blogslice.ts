@@ -1,11 +1,10 @@
 "use client";
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { RootState } from "../store";
 import { axiosInstance } from "@/Axios/config";
 import toast from "react-hot-toast";
+import { RootState } from "../store";
 
-const API_URL = "http://localhost:4000/blog";
 export interface Blog {
   _id: string;
   content: string;
@@ -16,105 +15,113 @@ export interface Blog {
 }
 
 interface BlogState {
-  blog: any;
+  blog: Blog | null;
+  blogs: Blog[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
 
 const initialState: BlogState = {
   blog: null,
+  blogs: [],
   status: "idle",
   error: null,
 };
 
-export const createBlog = createAsyncThunk(
+const getAuthToken = (state: RootState) => state.auth.userdata.token;
+
+export const createBlog = createAsyncThunk<Blog, Partial<Blog>>(
   "blogs/createBlog",
-  async (newBlog: any, thunkAPI) => {
+  async (newBlog, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
-    const token = state.auth.userdata.token;
+    const token = getAuthToken(state);
     const postedby = state.auth.userdata._id;
-    console.log("blog created");
-    console.log(postedby, state.auth);
 
     try {
-      const response = await axios.post(
-        `${API_URL}/createBlog`,
-        {
-          postedby: postedby,
-          ...newBlog,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const response = await axiosInstance.post(
+        `blog/createBlog`,
+        { postedby, ...newBlog },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-      return response.data;
+      toast.success("Blog created successfully");
+      return response.data.blogPost;
     } catch (error: any) {
-      console.log(error);
+      toast.error("Error creating blog");
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
-export const EditBlog = createAsyncThunk(
-  "blogs/EditBlog",
-  async (Blog: any, thunkAPI) => {
+
+export const editBlog = createAsyncThunk<Blog, Partial<Blog>>(
+  "blogs/editBlog",
+  async (blog, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
-    const token = state.auth.userdata.token;
-    console.log("blog edited");
-    console.log(state.auth);
+    const token = getAuthToken(state);
 
     try {
       const response = await axiosInstance.put(
-        `blog/update/${Blog._id}`,
-        {
-          content: Blog.content,
-          title: Blog.title,
-          tags: Blog.tags,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        `blog/update/${blog._id}`,
+        blog,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-      toast.success("Blog Edited Succesfullly");
+      toast.success("Blog edited successfully");
       return response.data;
     } catch (error: any) {
-      console.log(error);
-      toast.error("Error on Creating Blog");
+      toast.error("Error editing blog");
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
-export const tags = createAsyncThunk(
-  "blogs/tags",
-  async (tag: string, thunkAPI) => {
+
+export const fetchBlogsByTag = createAsyncThunk<Blog[], string>(
+  "blogs/fetchBlogsByTag",
+  async (tag, thunkAPI) => {
     try {
       const response = await axiosInstance.get(`blog/tag/${tag}`);
-      return response.data;
+      return response.data.blogPost;
     } catch (error: any) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
-export const DeleteBlog = createAsyncThunk(
-  "blogs/DeleteBlog",
-  async (_id: any, thunkAPI) => {
+
+export const fetchAllBlogs = createAsyncThunk<Blog[]>(
+  "blogs/fetchAllBlogs",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axiosInstance.get(`blog`);
+      return response.data.BlogPost;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchBlogById = createAsyncThunk<Blog, string>(
+  "blogs/fetchBlogById",
+  async (blogId, thunkAPI) => {
+    try {
+      const response = await axiosInstance.get(`blog/${blogId}`);
+      return response.data.blogPost;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const deleteBlog = createAsyncThunk<void, string>(
+  "blogs/deleteBlog",
+  async (_id, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
-    const token = state.auth.userdata.token;
+    const token = getAuthToken(state);
 
     try {
       const response = await axiosInstance.delete(`blog/delete/${_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
-      toast.success("Dlog Deleted ")
-      return response.data;
+      toast.success("Blog deleted successfully");
+      return response.data.blogPost;
     } catch (error: any) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -126,16 +133,39 @@ const blogSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-
       .addCase(createBlog.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(createBlog.fulfilled, (state) => {
+      .addCase(createBlog.fulfilled, (state, action) => {
         state.status = "succeeded";
+        state.blogs.push(action.payload);
       })
       .addCase(createBlog.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload as string;
+      })
+      .addCase(fetchBlogsByTag.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.blogs = action.payload;
+        state.blog = null;
+      })
+      .addCase(fetchAllBlogs.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.blogs = action.payload;
+      })
+      .addCase(fetchBlogById.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.blog = action.payload;
+      })
+      .addCase(fetchBlogById.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload as string;
+      })
+      .addCase(deleteBlog.fulfilled, (state, action: any) => {
+        state.status = "succeeded";
+        state.blogs = state.blogs.filter(
+          (blog) => blog._id !== action.payload._id
+        );
       });
   },
 });

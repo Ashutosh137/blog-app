@@ -1,5 +1,5 @@
 "use client"
-import { Blog, DeleteBlog } from '@/Redux/Blogslice/Blogslice'
+import { Blog, deleteBlog, } from '@/Redux/Blogslice/Blogslice'
 import { AppDispatch, RootState } from '@/Redux/store'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,15 +12,15 @@ import { useRouter } from 'next/navigation'
 function Controller({ Blog }: { Blog: Blog }) {
     const { isLogin, userdata } = useSelector((state: RootState) => state.auth)
     const dispatch = useDispatch<AppDispatch>()
-    const navigate=useRouter()
+    const navigate = useRouter()
 
     const [Edit, setEdit] = useState(false)
     const [Delete, setDelete] = useState(false)
 
     const handleDelete = () => {
-        dispatch(DeleteBlog(Blog._id))
+        dispatch(deleteBlog(Blog._id))
         handleDeleteToggle()
-        navigate.push("Blog")
+        navigate.push("/Blog")
 
     }
 

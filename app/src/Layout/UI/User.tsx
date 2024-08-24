@@ -1,25 +1,66 @@
-import { axiosInstance } from '@/Axios/config'
+"use client"
+import { axiosInstance } from '@/Axios/config';
 import Link from 'next/link';
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
-async function Users({ userid }: { userid: string; }) {
-    const response = await axiosInstance.get(`auth/profile/${userid}`)
-    const { name } = response.data.user
-
-    return (
-        <div className="flex flex-1 items-center space-x-4 p-4 rounded-lg shadow-lg border border-gray-700 ">
-            <img
-                src={`https://via.placeholder.com/200?text=${name}`}
-                alt="Profile Avatar"
-                className="size-12 rounded-full object-cover shadow-md border-2 border-primary"
-            />
-            <div className="text-gray-100 my-auto">
-                <h1 className="text-lg font-semibold capitalize">{name}</h1>
-                <Link href={`/Profile/${userid}`} className="text-gray-400 text-sm">Profile</Link>
-            </div>
-        </div>
-    )
-
+interface User {
+    _id: string;
+    name: string;
 }
 
-export default Users
+interface UsersProps {
+    userid: string;
+    size?: 'small' | 'large';
+}
+
+const Users: React.FC<UsersProps> = ({ userid, size = 'large' }) => {
+    const [user, setUser] = useState<User | null>(null);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await axiosInstance.get(`auth/profile/${userid}`);
+                setUser(response.data.user);
+            } catch (error: any) {
+            }
+        };
+
+        fetchUserData();
+    }, [userid]);
+
+    if (!user) return null;
+
+    const renderSmallUI = () => (
+        <div className="flex items-center space-x-3 p-3 rounded-lg bg-gray-800 shadow-md border border-gray-700">
+            <img
+                src={`https://via.placeholder.com/50?text=${user.name}`}
+                alt="Profile Avatar"
+                className="size-10 rounded-full object-cover border-2 border-primary"
+            />
+            <div className="text-gray-200">
+                <Link href={`/Profile/${user._id}`} className="text-sm font-semibold capitalize hover:text-primary transition-colors">
+                    {user.name || 'Anonymous'}
+                </Link>
+            </div>
+        </div>
+    );
+
+    const renderLargeUI = () => (
+        <div className="flex w-full items-center space-x-6 p-6 rounded-lg bg-gray-900 shadow-lg border border-gray-700">
+            <img
+                src={`https://via.placeholder.com/200?text=${user.name}`}
+                alt="Profile Avatar"
+                className="size-16 rounded-full object-cover shadow-lg border-2 border-primary"
+            />
+            <div className="text-gray-100">
+                <h1 className="text-xl font-semibold capitalize">{user.name}</h1>
+                <Link href={`/Profile/${user._id}`} className="text-gray-400 text-sm hover:text-primary transition-colors">View Profile</Link>
+            </div>
+        </div>
+    );
+
+    return size === 'small' ? renderSmallUI() : renderLargeUI();
+};
+
+export default Users;

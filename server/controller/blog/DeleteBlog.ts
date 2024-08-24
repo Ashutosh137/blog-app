@@ -27,7 +27,7 @@ const DeleteBlog = async (req: Request, res: Response) => {
 
     await CommentBlog.deleteMany({ BlogPost: _id });
 
-    return res.status(200).json({ message: "Blog post deleted successfully" });
+    return res.status(200).json({ message: "Blog post deleted successfully" ,blogPost});
   } catch (error: any) {
     if (error instanceof yup.ValidationError) {
       return res.status(400).json({ errors: error.errors });
