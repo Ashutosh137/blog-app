@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 function MyComponent() {
@@ -12,9 +13,9 @@ function MyComponent() {
           <p className="mt-6 text-lg text-gray-300 animate-fadeInUp delay-200">
             Join the ultimate blogging platform and bring your voice to the world.
           </p>
-          <a href="#" className="mt-10 inline-block bg-gradient-to-r from-primary2 to-primary3 text-white py-3 px-8 rounded-full text-lg hover:bg-primary2 transition duration-300 transform hover:scale-105 animate-bounce shadow-xl">
+          <Link href="/Blog" className="mt-10 inline-block bg-gradient-to-r from-primary2 to-primary3 text-white py-3 px-8 rounded-full text-lg hover:bg-primary2 transition duration-300 transform hover:scale-105 animate-bounce shadow-xl">
             Start Your Journey
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -87,9 +88,9 @@ function MyComponent() {
           <p className="mt-4 text-lg text-gray-300 animate-fadeInUp delay-200">
             Join a community of passionate bloggers today and start creating your masterpiece.
           </p>
-          <a href="#" className="mt-10 inline-block bg-gradient-to-r from-primary2 to-primary3 text-white py-3 px-8 rounded-full text-lg hover:bg-primary2 transition duration-300 transform hover:scale-105 animate-bounce shadow-xl">
+          <Link href="/Blog" className="mt-10 inline-block bg-gradient-to-r from-primary2 to-primary3 text-white py-3 px-8 rounded-full text-lg hover:bg-primary2 transition duration-300 transform hover:scale-105 animate-bounce shadow-xl">
             Join Now
-          </a>
+          </Link>
         </div>
       </section>
 
