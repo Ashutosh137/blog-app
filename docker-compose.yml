@@ -1,16 +1,16 @@
-version: "3.8"
+version: '3.8'
+
 services:
   app:
     build:
       context: ./app
-      dockerfile: Dockerfile
+    image: blog-app-app:latest
     ports:
       - "3000:3000"
-    depends_on:
-      - server
+
   server:
     build:
       context: ./server
-      dockerfile: Dockerfile
+    image: blog-app-server:latest
     ports:
       - "4000:4000"
