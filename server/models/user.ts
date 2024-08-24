@@ -5,6 +5,7 @@ const UserSchema = new Schema({
   password: { type: String },
   token: { type: String, required: false },
   signin: { type: String, enum: ["google", "email"] },
+  isAdmin: { type: Boolean, default: false },
 });
 const User = mongoose.model("user", UserSchema);
 UserSchema.index({ email: 1 }, { unique: true });

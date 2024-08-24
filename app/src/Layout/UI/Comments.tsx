@@ -35,7 +35,7 @@ function Comments({ comment }: { comment: Comment }) {
                             <div className="comment-container">
                                 <p dangerouslySetInnerHTML={{ __html: comment.text }} />
                             </div>
-                            {comment.postedby === userdata?._id &&
+                            {(comment.postedby === userdata?._id || userdata?.isAdmin) &&
                                 <div className="mt-4 flex space-x-4 text-gray-400 text-sm">
                                     <button className="hover:text-red-500 transition-colors duration-150" onClick={handleDelete}><MdDeleteForever className='text-2xl' /></button>
                                 </div>

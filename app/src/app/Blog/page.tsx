@@ -15,7 +15,7 @@ export default function Page() {
         dispatch(fetchAllBlogs());
     }, [dispatch]);
 
-    if (status === "loading") {
+    if (status === "loading" || status === "idle") {
         return <Loading />;
     }
 

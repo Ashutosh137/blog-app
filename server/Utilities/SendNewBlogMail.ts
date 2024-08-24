@@ -11,8 +11,8 @@ const sendEmail = (recipientEmail: any, blog: any) => {
   const mailOptions = {
     from: "mr.luckysharma7@gmail.com",
     to: recipientEmail,
-    subject: "New Blog Post Published",
-    text: `A new blog titled "${blog.title}" has been published. Check it out!`,
+    subject: blog.title,
+    html: blog.content,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {

@@ -34,7 +34,7 @@ function Page() {
       <form onSubmit={handleLogin} className='p-2 container max-w-screen-sm mx-auto'>
         <Error error={error as string} />
         <Input label='email' type='email' onChange={(e) => setEmail(e.target.value)} value={Email} />
-        <Input label='password' name='password' value={Password} onChange={(e) => setPassword(e.target.value)} type='password' />
+        <Input minLength={6} label='password' name='password' value={Password} onChange={(e) => setPassword(e.target.value)} type='password' />
         <Button type='submit' label='login' />
       </form>
     </div>

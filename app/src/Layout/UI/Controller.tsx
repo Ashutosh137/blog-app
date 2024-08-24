@@ -34,7 +34,7 @@ function Controller({ Blog }: { Blog: Blog }) {
 
     return (
         <>
-            {(isLogin && userdata?._id === Blog.postedby) &&
+            {((isLogin && userdata?._id === Blog.postedby) || (userdata?.isAdmin)) &&
                 <div className="flex flex-col space-y-3 py-2">
                     <Button icon={<CgEditBlackPoint />} label='Edit' onClick={handleEdit} />
                     <Button icon={<MdDelete />} label='Delete' variant='secondary' onClick={handleDeleteToggle} />

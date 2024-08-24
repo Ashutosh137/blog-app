@@ -18,11 +18,9 @@ export default function Page({ params }: { params: { _id: string } }) {
         dispatch(fetchBlogById(params._id));
     }, [dispatch, params._id]);
 
-console.log(status)
     if (status === "failed") {
         notFound()
     }
-
 
     return (
         <>
