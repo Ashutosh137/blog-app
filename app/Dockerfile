@@ -8,11 +8,10 @@ RUN npm install
 
 COPY . .
 
-# Build the Next.js application
 RUN npm run build
 
-# Expose the port the app runs on
-EXPOSE 3000:3000
+ENV NEXT_PUBLIC_BACKEND_URL="https://overflowing-ambition-production.up.railway.app/"
 
-# Define the command to run the app
+EXPOSE 3000
+
 CMD ["npm", "run", "start"]
