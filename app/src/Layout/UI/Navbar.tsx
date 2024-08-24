@@ -51,10 +51,7 @@ const Navbar: React.FC = () => {
                         <IoNewspaper className='text-2xl' title='Blogs' />
                         <span>All Blogs</span>
                     </div>
-                    <div className="flex items-center space-x-2 cursor-pointer hover:bg-gray-700 px-3 py-2 rounded" onClick={() => handleNavigation("/CreateBlog")}>
-                        <IoIosCreate className='text-2xl' title='Create Blog' />
-                        <span>Create Blog</span>
-                    </div>
+
                     {!isLogin && (
                         <>
                             <div className="flex items-center space-x-2 cursor-pointer hover:bg-gray-700 px-3 py-2 rounded" onClick={() => handleNavigation("/login")}>
@@ -69,6 +66,10 @@ const Navbar: React.FC = () => {
                     )}
                     {isLogin && (
                         <>
+                            <div className="flex items-center space-x-2 cursor-pointer hover:bg-gray-700 px-3 py-2 rounded" onClick={() => handleNavigation("/CreateBlog")}>
+                                <IoIosCreate className='text-2xl' title='Create Blog' />
+                                <span>Create Blog</span>
+                            </div>
                             <div className="flex items-center space-x-2 cursor-pointer hover:bg-gray-700 px-3 py-2 rounded" onClick={() => handleNavigation(`/Profile/${userdata._id}`)}>
                                 <CgProfile className='text-2xl' title='Profile' />
                                 <span>Profile</span>
@@ -93,7 +94,7 @@ const Navbar: React.FC = () => {
                 </button>
             </div>
             {/* Mobile Menu */}
-            <div className={`md:hidden ${isOpen ? 'block' : 'hidden'} mt-4 transition-transform duration-300 ease-in-out transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} bg-gray-800 fixed top-0 right-0 w-64 h-full z-50`}>
+            <div className={`md:hidden ${isOpen ? 'block' : 'hidden'} transition-transform animate-swip duration-300 ease-in-out transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} bg-gray-800 fixed top-0 right-0 w-64 h-full z-50`}>
                 <div className="p-4 space-y-4">
                     <div className="flex items-center space-x-2 cursor-pointer text-gray-200 hover:bg-gray-700 px-3 py-2 rounded" onClick={() => handleNavigation("/")}>
                         <BiHome className='text-2xl' title='Home' />

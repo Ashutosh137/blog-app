@@ -21,6 +21,15 @@ const config: Config = {
         bgPrimary: "#7dd3fc",
         bgSecondary: "#182233",
       },
+      animation: {
+        swip: "swip 1s ease-in-out",
+      },
+      keyframes: {
+        swip: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
+      },
     },
   },
   plugins: [],
