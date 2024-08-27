@@ -32,7 +32,7 @@ const Users: React.FC<UsersProps> = ({ userid, size = 'large' }) => {
     if (!user) return null;
 
     const renderSmallUI = () => (
-        <div className="flex w-full mr-10 items-center space-x-3 p-3 rounded-lg bg-gray-800 shadow-md border border-gray-700">
+        <div className="flex w-full mr-10 items-center space-x-3 p-3 rounded-lg bg-gray-800 shadow-md ">
             <img
                 src={`https://via.placeholder.com/50?text=${user.name}`}
                 alt="Profile Avatar"
@@ -47,7 +47,7 @@ const Users: React.FC<UsersProps> = ({ userid, size = 'large' }) => {
     );
 
     const renderLargeUI = () => (
-        <div className="flex w-full items-center space-x-6 p-6 rounded-lg bg-bgSecondary shadow-lg border border-gray-700">
+        <div className="flex w-full items-center space-x-6 p-6 rounded-lg bg-bgSecondary shadow-lg ">
             <img
                 src={`https://via.placeholder.com/200?text=${user.name}`}
                 alt="Profile Avatar"

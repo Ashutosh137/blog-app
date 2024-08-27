@@ -4,6 +4,7 @@ import Controller from '../UI/Controller';
 import Tag from '../../UI/tag';
 import "@/assets/blog.css";
 import { Blog } from '@/Redux/Blogslice/Blogslice';
+import Share from '../UI/share';
 
 function BlogContainer({ blog }: { blog: Blog }) {
     return (
@@ -26,7 +27,8 @@ function BlogContainer({ blog }: { blog: Blog }) {
                 <hr className="border-gray-700" />
                 <p className='text-left text-sm p-3 text-gray-200'>{new Date(blog.created_at).toLocaleDateString()}</p>
 
-                <div className="flex justify-between items-center text-gray-400 text-sm p-3">
+                <Share Blogid={blog._id} title={blog.title}/>
+                <div className="flex justify-between items-center border rounded-md border-gray-700 text-gray-400 text-sm p-3">
                     <Users userid={blog.postedby} />
                     <Controller Blog={blog} />
                 </div>
