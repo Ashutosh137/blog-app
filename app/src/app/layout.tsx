@@ -3,6 +3,7 @@ import { Stardos_Stencil } from "next/font/google";
 import "./globals.css";
 import { UseReduxprovider } from "@/Redux/store";
 import Navbar from "@/Layout/UI/Navbar";
+import Footer from "@/Layout/UI/footer";
 
 const inter = Stardos_Stencil({ subsets: ["latin"], weight: "400" });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
           <div className="bg-bgSecondary">
             {children}
           </div>
+          <Footer/>
         </UseReduxprovider>
       </body>
     </html>

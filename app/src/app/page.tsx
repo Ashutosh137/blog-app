@@ -94,21 +94,7 @@ function MyComponent() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-800 py-8">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <div className="flex flex-wrap justify-between items-center text-gray-400">
-            <div className="text-center md:text-left">
-              <p>&copy; 2024 MyBlog. All rights reserved.</p>
-            </div>
-            <div className="mt-4 md:mt-0 flex justify-center md:justify-end space-x-4">
-              <a href="#" className="hover:text-white">Privacy Policy</a>
-              <a href="#" className="hover:text-white">Terms of Service</a>
-              <a href="#" className="hover:text-white">Contact Us</a>
-            </div>
-          </div>
-        </div>
-      </footer>
+     
     </div>
   );
 }

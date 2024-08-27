@@ -15,6 +15,7 @@
 
 .blog-container h2 {
   font-size: 2rem;
+  margin-top: 1rem;
   color: #38bdf8; /* Bright blue for headings */
   margin-bottom: 1.5rem;
   border-bottom: 2px solid #475569; /* Underline effect */
@@ -59,13 +60,17 @@
   color: #7dd3fc; /* Lighter blue on hover */
 }
 
-.blog-container code {
-  background-color: #334155; /* Dark background for inline code */
-  color: #38bdf8; /* Bright blue text */
+.blog-container code,
+pre {
+  background-color: #334155;
+  color: #38bdf8;
+  margin: 0.2rem;
   padding: 0.2rem 0.4rem;
   border-radius: 5px;
   font-size: 0.9rem;
-  transition: background-color 0.3s ease; /* Smooth background transition */
+  white-space: pre-line;
+
+  transition: background-color 0.3s ease;
 }
 
 .blog-container code:hover {
