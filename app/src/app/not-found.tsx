@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r bg-bgSecondary text-gray-100">
+    <div className="min-h-screen flex items-center justify-center text-gray-100">
       <div className="text-center p-8 bg-gray-800 rounded-lg shadow-lg max-w-md">
         <AiOutlineFrown className="text-red-500 text-6xl mx-auto mb-4" />
         <h1 className="text-5xl font-extrabold mb-4">404</h1>

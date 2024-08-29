@@ -1,41 +1,26 @@
-"use client"
-import { axiosInstance } from '@/Axios/config';
+import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
+import React from 'react';
 
-interface User {
+export interface User {
     _id: string;
     name: string;
 }
 
 interface UsersProps {
-    userid: string;
+    user: User;
     size?: 'small' | 'large';
 }
 
-const Users: React.FC<UsersProps> = ({ userid, size = 'large' }) => {
-    const [user, setUser] = useState<User | null>(null);
-
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await axiosInstance.get(`auth/profile/${userid}`);
-                setUser(response.data.user);
-            } catch (error: any) {
-            }
-        };
-
-        fetchUserData();
-    }, [userid]);
-
-    if (!user) return null;
+const Users: React.FC<UsersProps> = ({ user, size = 'large' }) => {
 
     const renderSmallUI = () => (
-        <div className="flex w-full mr-10 items-center space-x-3 p-3 rounded-lg bg-gray-800 shadow-md ">
-            <img
+        <div className="flex w-full mr-10 items-center space-x-3 p-3 rounded-lg  shadow-md ">
+            <Image
                 src={`https://via.placeholder.com/50?text=${user.name}`}
                 alt="Profile Avatar"
+                width={16}
+                height={16}
                 className="size-10 rounded-full object-cover border-2 border-primary"
             />
             <div className="text-gray-200">
@@ -47,10 +32,12 @@ const Users: React.FC<UsersProps> = ({ userid, size = 'large' }) => {
     );
 
     const renderLargeUI = () => (
-        <div className="flex w-full items-center space-x-6 p-6 rounded-lg bg-bgSecondary shadow-lg ">
-            <img
+        <div className="flex w-full items-center space-x-6 p-6 rounded-lg border-2 border-bgPrimary  shadow-lg ">
+            <Image
                 src={`https://via.placeholder.com/200?text=${user.name}`}
                 alt="Profile Avatar"
+                width={16}
+                height={16}
                 className="size-16 rounded-full object-cover shadow-lg border-2 border-primary"
             />
             <div className="text-gray-100">

@@ -18,7 +18,7 @@ function BlogsGroup({ BlogPost }: { BlogPost: Blog[] }) {
     return (
         <div className="flex flex-col space-y-8 md:space-y-12 lg:space-y-16">
             {BlogPost.map((blogpost: Blog, index: Key) => (
-                <Link href={`/Blog/${blogpost._id}`} key={index} passHref>
+                <Link  href={`/Blog/${blogpost._id}`} key={index} passHref>
                     <BlogContainerMask>
                         <BlogContainer blog={blogpost} />
                     </BlogContainerMask>

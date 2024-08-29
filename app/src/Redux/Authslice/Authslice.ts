@@ -30,7 +30,7 @@ export const login = createAsyncThunk(
         email,
         password,
       });
-      toast.success("User Login successfully")
+      toast.success("User Login successfully");
 
       const { token, user } = response.data;
       return { token, user };
@@ -59,12 +59,12 @@ export const register = createAsyncThunk(
         name,
       });
 
-      toast.success("User registered successfully")
-      
+      toast.success("User registered successfully");
+
       const { token } = response.data;
       return { token };
     } catch (error: any) {
-      console.log(error)
+      console.log(error);
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }

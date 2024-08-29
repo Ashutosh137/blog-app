@@ -8,7 +8,7 @@ import Footer from "@/Layout/UI/footer";
 const inter = Actor({ subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
-  title: "BlogUp : latest blogs on Web Technology",
+  title: "BlogUp : latest blogs on Technology",
   description: "Blog",
 };
 

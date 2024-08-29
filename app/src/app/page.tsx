@@ -4,7 +4,7 @@ import React from 'react';
 function MyComponent() {
   return (
     <div className="min-h-screen bg-bgSecondary text-white font-sans">
-      <section className="relative flex items-center justify-center min-h-screen bg-cover bg-center" style={{ backgroundImage: 'url(/images/hero-bg.jpg)' }}>
+      <section className="relative flex items-center justify-center min-h-screen bg-cover bg-center">
         <div className="absolute inset-0 bg-bgSecondary opacity-50"></div>
         <div className="relative z-10 text-center max-w-4xl px-6">
           <h1 className="text-6xl font-extrabold leading-tight animate-fadeInUp shadow-lg">

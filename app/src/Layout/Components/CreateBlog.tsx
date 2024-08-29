@@ -122,7 +122,6 @@ function CreateBlog({ Edit, Blog, Toggle }: { Edit?: boolean, Blog?: any, Toggle
                             label="Add Tag"
                             type="button"
                             onClick={handleAddTag}
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-300 ease-in-out"
                         />
                     </div>
                 </div>

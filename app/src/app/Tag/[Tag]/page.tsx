@@ -1,43 +1,32 @@
-"use client";
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '@/Redux/store';
+import React from 'react';
 import BlogsGroup from '@/Layout/Components/BlogsGroup';
-import { fetchBlogsByTag } from '@/Redux/Blogslice/Blogslice';
-import Loading from '@/UI/loading';
+import { axiosInstance } from '@/Axios/config';
+import { notFound } from 'next/navigation';
 
-export default function Page({ params }: { params: any }) {
-    const { Tag } = params;
-    const dispatch = useDispatch<AppDispatch>();
-    const { blogs, status } = useSelector((state: RootState) => state.blog);
+export default async function Page({ params }: { params: any }) {
+    try {
+        const { Tag } = params
+        const response = await axiosInstance(`/blog/tag/${Tag}`)
+        const { blogPost } = response.data
 
-    useEffect(() => {
-        dispatch(fetchBlogsByTag(Tag));
-    }, [dispatch, Tag]);
-
-    return (
-        <div className="min-h-screen text-gray-100">
-            <div className="container mx-auto p-6">
-                <div className="mb-12">
-                    <h2 className="text-4xl text-center font-extrabold text-gray-100 mb-4 bg-gradient-to-r from-blue-900 to-purple-600 bg-clip-text text-transparent">
-                        Posts Tagged with <span className="text-blue-300">&quot;{Tag}&quot;</span>
-                    </h2>
-                    <p className="text-gray-400 text-center text-lg">
-                        Explore the latest articles and insights related to <span className="text-blue-300">{Tag}</span>.
-                    </p>
-                </div>
-
-                {status === "loading" ? (
-                    <Loading />
-                ) : blogs.length ? (
-                    <BlogsGroup BlogPost={blogs} />
-                ) : (
-                    <div className="text-center py-12 bg-gray-800 border border-gray-700 rounded-lg shadow-lg">
-                        <h2 className="text-3xl font-bold text-gray-200 mb-4">No Blog Posts Found</h2>
-                        <p className="text-gray-400">We couldn’t find any blog posts related to the tag &quot;<span className="italic text-blue-300">{Tag}</span>&quot;.</p>
+        return (
+            <div className="min-h-screen text-gray-100">
+                <div className="container mx-auto p-6">
+                    <div className="mb-12">
+                        <h2 className="text-4xl text-center font-extrabold text-gray-100 mb-4 bg-gradient-to-r from-blue-900 to-purple-600 bg-clip-text text-transparent">
+                            Posts Tagged with <span className="text-blue-300">&quot;{Tag}&quot;</span>
+                        </h2>
+                        <p className="text-gray-400 text-center text-lg">
+                            Explore the latest articles and insights related to <span className="text-blue-300">{Tag}</span>.
+                        </p>
                     </div>
-                )}
+                    <BlogsGroup BlogPost={blogPost} />
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
+    catch (err) {
+        console.log(err)
+        notFound()
+    }
 }

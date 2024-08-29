@@ -1,10 +1,10 @@
 import React from 'react';
-import Users from '../UI/User';
 import Controller from '../UI/Controller';
 import Tag from '../../UI/tag';
 import "@/assets/blog.css";
 import { Blog } from '@/Redux/Blogslice/Blogslice';
 import Share from '../UI/share';
+import FetchUser from './fetchUser';
 
 function BlogContainer({ blog }: { blog: Blog }) {
     return (
@@ -27,9 +27,9 @@ function BlogContainer({ blog }: { blog: Blog }) {
                 <hr className="border-gray-700" />
                 <p className='text-left text-sm p-3 text-gray-200'>{new Date(blog.created_at).toLocaleDateString()}</p>
 
-                <Share Blogid={blog._id} title={blog.title}/>
+                <Share Blogid={blog._id} title={blog.title} />
                 <div className="flex justify-between items-center border rounded-md border-gray-700 text-gray-400 text-sm p-3">
-                    <Users userid={blog.postedby} />
+                    <FetchUser ui='large' id={blog.postedby} />
                     <Controller Blog={blog} />
                 </div>
             </div>

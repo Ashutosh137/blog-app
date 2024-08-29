@@ -1,5 +1,4 @@
 "use client";
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "@/Axios/config";
 import toast from "react-hot-toast";
@@ -73,42 +72,6 @@ export const editBlog = createAsyncThunk<Blog, Partial<Blog>>(
   }
 );
 
-export const fetchBlogsByTag = createAsyncThunk<Blog[], string>(
-  "blogs/fetchBlogsByTag",
-  async (tag, thunkAPI) => {
-    try {
-      const response = await axiosInstance.get(`blog/tag/${tag}`);
-      return response.data.blogPost;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const fetchAllBlogs = createAsyncThunk<Blog[]>(
-  "blogs/fetchAllBlogs",
-  async (_, thunkAPI) => {
-    try {
-      const response = await axiosInstance.get(`blog`);
-      return response.data.BlogPost;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const fetchBlogById = createAsyncThunk<Blog, string>(
-  "blogs/fetchBlogById",
-  async (blogId, thunkAPI) => {
-    try {
-      const response = await axiosInstance.get(`blog/${blogId}`);
-      return response.data.blogPost;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
-  }
-);
-
 export const deleteBlog = createAsyncThunk<void, string>(
   "blogs/deleteBlog",
   async (_id, thunkAPI) => {
@@ -141,23 +104,6 @@ const blogSlice = createSlice({
         state.blogs.push(action.payload);
       })
       .addCase(createBlog.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload as string;
-      })
-      .addCase(fetchBlogsByTag.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.blogs = action.payload;
-        state.blog = null;
-      })
-      .addCase(fetchAllBlogs.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.blogs = action.payload;
-      })
-      .addCase(fetchBlogById.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.blog = action.payload;
-      })
-      .addCase(fetchBlogById.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload as string;
       })
