@@ -7,6 +7,8 @@ services:
     image: blog-app-app:latest
     ports:
       - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=https://overflowing-ambition-production.up.railway.app/ 
 
   server:
     build:
