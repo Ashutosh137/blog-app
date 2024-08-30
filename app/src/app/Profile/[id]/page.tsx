@@ -15,7 +15,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         const { user } = response.data
         const { blogPost } = Blogresponse.data
 
-        return <div className='mx-auto max-w-4xl flex flex-col space-y-5'>
+        return <div className=' flex flex-col space-y-5'>
             <Head>
                 <title>{user.name}</title>
                 <meta name="description" content={user.bio} />

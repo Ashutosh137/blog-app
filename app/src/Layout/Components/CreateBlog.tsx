@@ -76,7 +76,7 @@ function CreateBlog({ Edit, Blog, Toggle }: { Edit?: boolean, Blog?: any, Toggle
     };
 
     return (
-        <div className=" px-10 max-w-[100vw] lg:max-w-screen-lg mx-auto mt-8 p-3 sm:p-8 bg-bgSecondary border border-primary text-gray-100 shadow-xl rounded-xl">
+        <div className=" px-10 max-w-[100vw] mx-auto mt-8 p-3 sm:p-8 bg-bgSecondary border border-primary text-gray-100 shadow-xl rounded-xl">
             <div className="container mx-auto my-10 px-6 md:px-12 lg:px-20 text-center mb-12  p-3 sm:p-8 rounded-lg shadow-lg">
                 <h1 className="text-2xl md:text-4xl font-extrabold leading-tight animate-fadeInUp text-white">
                     Welcome to Your Blog Space

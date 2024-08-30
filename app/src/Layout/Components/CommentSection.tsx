@@ -41,7 +41,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ blogId }) => {
     };
 
     return (
-        <section className="bg-[#1e293b] max-w-5xl mx-auto text-gray-200 p-8 mb-5 sm:mb-10  border border-gray-700">
+        <section className="bg-[#1e293b]  mx-auto text-gray-200 p-8 mb-5 sm:mb-10  border border-gray-700">
             <h2 className="text-3xl font-extrabold mb-6 text-primary border-b-4 border-primary pb-2">
                 Comments
             </h2>

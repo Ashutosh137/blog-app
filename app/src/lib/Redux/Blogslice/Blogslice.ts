@@ -11,7 +11,7 @@ export interface Blog {
   created_at: string;
   tags: string[];
   postedby: string;
-  likes?:string[]
+  likes:string[]
 }
 
 interface BlogState {

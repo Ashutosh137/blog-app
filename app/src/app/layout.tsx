@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <UseReduxprovider>
           <Navbar />
-          <div className="bg-bgSecondary">
+          <div className="bg-bgSecondary max-w-5xl mx-auto">
             {children}
           </div>
           <Footer />

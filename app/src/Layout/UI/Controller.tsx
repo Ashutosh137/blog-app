@@ -1,6 +1,6 @@
 "use client"
 import { Blog, deleteBlog, } from '@/lib/Redux/Blogslice/Blogslice'
-import { AppDispatch, RootState } from '@/Redux/store'
+import { AppDispatch, RootState } from '@/lib/Redux/store'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Button from '../../UI/button'
