@@ -8,6 +8,7 @@ import { MdDeleteForever } from 'react-icons/md';
 import FetchUser from '../Components/fetchUser';
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
 import useDebounce from '@/lib/Hooks/useDebounce';
+import toast from 'react-hot-toast';
 
 function Comments({ comment }: { comment: Comment }) {
     const dispatch = useDispatch<AppDispatch>()
@@ -15,7 +16,6 @@ function Comments({ comment }: { comment: Comment }) {
     const { userdata } = useSelector((state: RootState) => state.auth)
     const [liked, setliked] = useState(false)
 
-    console.log(comment)
     useEffect(() => {
         if (comment.likes.includes(userdata._id)) {
             setliked(true)
@@ -27,6 +27,7 @@ function Comments({ comment }: { comment: Comment }) {
         setisDeleted(true)
     }
     const handleLikeComment = () => {
+        !userdata && toast.error("Please Login Again")
         dispatch(LikeComment(comment._id))
         setliked(!liked)
     }

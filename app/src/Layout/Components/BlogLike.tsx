@@ -5,6 +5,7 @@ import useDebounce from '@/lib/Hooks/useDebounce';
 import { RootState, AppDispatch } from '@/lib/Redux/store';
 import { BiSolidUpvote, BiUpvote } from 'react-icons/bi';
 import { LikeBlog } from '@/lib/Redux/Blogslice/Blogslice';
+import toast from 'react-hot-toast';
 
 interface LikeProps {
     Likes: string[];
@@ -12,7 +13,7 @@ interface LikeProps {
 }
 
 function Like({ Likes, blogId }: LikeProps) {
-    const { userdata } = useSelector((state: RootState) => state.auth);
+    const { userdata, isLogin } = useSelector((state: RootState) => state.auth);
     const dispatch = useDispatch<AppDispatch>();
     const [liked, setLiked] = React.useState(false);
 
@@ -20,9 +21,11 @@ function Like({ Likes, blogId }: LikeProps) {
         if (userdata && userdata._id && Likes.includes(userdata._id)) {
             setLiked(true)
         }
+
     }, [userdata, Likes])
 
     const handleClick = useDebounce(() => {
+        !isLogin && toast.error("Please Login Again")
         dispatch(LikeBlog(blogId));
         setLiked(!liked);
     }, 500);

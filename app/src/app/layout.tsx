@@ -9,7 +9,7 @@ const inter = Actor({ subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
   title: "BlogUp : latest blogs on Technology",
-  description: "Blog",
+  description: "A modern, responsive blogging platform designed for seamless content creation and sharing. Create, edit, and manage your blogs with an intuitive interface, rich text editor, and advanced features for an enhanced reading and writing experience. Perfect for bloggers, writers, and content creators.",
 };
 
 export default function RootLayout({

@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import Button from '@/UI/button';
 import Heading from '@/UI/heading';
 import { createBlog, editBlog } from '@/lib/Redux/Blogslice/Blogslice';
@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import "@/assets/blog.css"
 import dynamic from 'next/dynamic';
 import toast from 'react-hot-toast';
+import Loading from '@/UI/loading';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -19,7 +20,11 @@ function CreateBlog({ Edit, Blog, Toggle }: { Edit?: boolean, Blog?: any, Toggle
     const [title, setTitle] = useState(Blog?.title || "");
     const [preview, setPreview] = useState<string | null>(null);
     const dispatch = useDispatch<AppDispatch>();
-    const { isLogin } = useSelector((state: RootState) => state.auth);
+    const { isLogin, status } = useSelector((state: RootState) => state.auth);
+
+    useEffect(() => {
+        handlePreview()
+    }, [blogContent])
 
     const handleBlogSave = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -60,6 +65,8 @@ function CreateBlog({ Edit, Blog, Toggle }: { Edit?: boolean, Blog?: any, Toggle
         setPreview(blogContent);
     };
 
+
+
     const resetForm = () => {
         setBlogContent("");
         setTitle("");
@@ -69,7 +76,7 @@ function CreateBlog({ Edit, Blog, Toggle }: { Edit?: boolean, Blog?: any, Toggle
     };
 
     return (
-        <div className="max-w-screen-lg mx-auto mt-8 p-3 sm:p-8 bg-bgSecondary border border-primary text-gray-100 shadow-xl rounded-xl">
+        <div className=" px-10 max-w-[100vw] lg:max-w-screen-lg mx-auto mt-8 p-3 sm:p-8 bg-bgSecondary border border-primary text-gray-100 shadow-xl rounded-xl">
             <div className="container mx-auto my-10 px-6 md:px-12 lg:px-20 text-center mb-12  p-3 sm:p-8 rounded-lg shadow-lg">
                 <h1 className="text-2xl md:text-4xl font-extrabold leading-tight animate-fadeInUp text-white">
                     Welcome to Your Blog Space
@@ -78,9 +85,10 @@ function CreateBlog({ Edit, Blog, Toggle }: { Edit?: boolean, Blog?: any, Toggle
                     Express your thoughts, share your stories, and connect with a like-minded community.
                 </p>
             </div>
+            {status == "loading" && <Loading />}
 
             <form onSubmit={handleBlogSave} className="space-y-4 border border-bgPrimary rounded-xl p-5">
-                <Heading label={Edit?"edit blog":'write your blog '}/>
+                <Heading label={Edit ? "edit blog" : 'write your blog '} />
                 <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
                     <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="title">
                         Title
@@ -88,10 +96,11 @@ function CreateBlog({ Edit, Blog, Toggle }: { Edit?: boolean, Blog?: any, Toggle
                     <input
                         type="text"
                         id="title"
+                        required
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder="Enter blog title"
-                        className="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out transform"
+                        className="w-full bg-gray-700 border border-gray-600  rounded-md px-3 py-2 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out transform"
                     />
                 </div>
 
@@ -102,7 +111,7 @@ function CreateBlog({ Edit, Blog, Toggle }: { Edit?: boolean, Blog?: any, Toggle
                     <ReactQuill
                         value={blogContent}
                         onChange={setBlogContent}
-                        className=" bg text-white border border-gray-600 rounded-md"
+                        className=" bg text-white border max-h-[20rem] overflow-y-scroll border-gray-600 rounded-md"
                     />
                 </div>
 
@@ -126,7 +135,7 @@ function CreateBlog({ Edit, Blog, Toggle }: { Edit?: boolean, Blog?: any, Toggle
                     </div>
                 </div>
 
-                {blogTags.length!==0 && <div className='bg-gray-800 p-6 rounded-lg shadow-lg'>
+                {blogTags.length !== 0 && <div className='bg-gray-800 p-6 rounded-lg shadow-lg'>
                     <div className="flex flex-wrap gap-2">
                         {blogTags.map((tag, index) => (
                             <div key={index} className="bg-gray-700 text-gray-200 py-1 px-3 rounded-md flex items-center space-x-2">
@@ -168,7 +177,8 @@ function CreateBlog({ Edit, Blog, Toggle }: { Edit?: boolean, Blog?: any, Toggle
             {preview && (
                 <div className="mt-6 p-4 border border-gray-600 rounded-md bg-gray-800 shadow-lg">
                     <h2 className="text-lg font-bold mb-2 text-white">Preview</h2>
-                    <div dangerouslySetInnerHTML={{ __html: preview }} className="blog-container" />
+                    <h1 className="text-4xl my-5 font-extrabold px-10 capitalize text-primary">{title}</h1>
+                    <div dangerouslySetInnerHTML={{ __html: preview }} className="blog-container max-h-[20rem] overflow-y-scroll" />
                 </div>
             )}
         </div>
