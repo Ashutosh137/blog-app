@@ -18,7 +18,7 @@ function BlogsGroup({ BlogPost }: { BlogPost: Blog[] }) {
         } else if (Sort === "oldest") {
             sortedBlogs = sortedBlogs.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
         } else if (Sort === "like") {
-            sortedBlogs = sortedBlogs.sort((a, b) => b.likes.length - a.likes.length);
+            sortedBlogs = sortedBlogs.sort((a, b) => b.likes?.length - a.likes?.length);
         } else if (Sort === "default") {
             sortedBlogs = [...BlogPost];
         }
