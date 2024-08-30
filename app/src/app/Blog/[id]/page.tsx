@@ -10,9 +10,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         const response = await axiosInstance(`/blog/${params.id}`)
         const { blogPost } = response.data
 
-        if (!!blogPost.length) {
-            notFound()
-        }
+
         return (
             <>
                 <Head>
