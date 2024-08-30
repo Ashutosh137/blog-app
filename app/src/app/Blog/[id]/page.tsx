@@ -1,8 +1,9 @@
 import React from "react"
 import { axiosInstance } from "@/Axios/config";
-import BlogContainer from "@/Layout/Components/BlogContainer";
+import BlogContainer from "@/Layout/UI/BlogContainer";
 import { notFound } from "next/navigation";
 import CommentSection from "@/Layout/Components/CommentSection";
+import Head from "next/head";
 export const revalidate = 10
 export default async function Page({ params }: { params: { id: string } }) {
     try {
@@ -14,6 +15,11 @@ export default async function Page({ params }: { params: { id: string } }) {
         }
         return (
             <>
+                <Head>
+                    <title>{blogPost.title}</title>
+                    <meta name="description" content={blogPost.content} />
+                    <meta name="keywords" content={blogPost.tags} />
+                </Head>
                 <BlogContainer blog={blogPost} />
                 <CommentSection blogId={blogPost._id} />
             </>

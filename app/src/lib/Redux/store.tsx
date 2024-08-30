@@ -1,12 +1,11 @@
 "use client"
 import React from 'react';
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './Authslice/Authslice';
 import blogReducer from './Blogslice/Blogslice';
-import commentReducer from './Commentslice/commentslice';
+import commentReducer from '@/lib/Redux/Commentslice/commentslice'
 import { Provider } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
-
+import authReducer from '@/lib/Redux/Authslice/Authslice'
 export const store = configureStore({
     reducer: {
         auth: authReducer,

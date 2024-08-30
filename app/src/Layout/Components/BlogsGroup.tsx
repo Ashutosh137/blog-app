@@ -1,8 +1,8 @@
 import React, { Key } from 'react';
 import BlogContainerMask from '../UI/BlogContainerMask';
-import BlogContainer from './BlogContainer';
+import BlogContainer from '../UI/BlogContainer';
 import Link from 'next/link';
-import { Blog } from '@/Redux/Blogslice/Blogslice';
+import { Blog } from '@/lib/Redux/Blogslice/Blogslice';
 
 
 function BlogsGroup({ BlogPost }: { BlogPost: Blog[] }) {

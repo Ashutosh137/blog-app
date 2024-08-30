@@ -7,7 +7,7 @@ function Footer() {
             <div className="container mx-auto px-6 md:px-12 lg:px-20">
                 <div className="flex flex-wrap justify-between items-start text-gray-400">
                     <div className="w-full md:w-1/3 lg:w-1/4  md:text-left mb-6 md:mb-0">
-                        <h2 className="text-white text-xl font-bold mb-2">MyBlog</h2>
+                        <h2 className="text-white text-xl font-bold mb-2">BlogUp</h2>
                         <p className="text-base my-2 mr-10">Your go-to platform for insightful blogs, tutorials, and community discussions. Join us and start your journey into the world of knowledge.</p>
                     </div>
 

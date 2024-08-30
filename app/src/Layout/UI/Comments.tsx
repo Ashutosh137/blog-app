@@ -1,21 +1,36 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "@/assets/comment.css"
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '@/Redux/store';
-import { Comment, deleteComment } from '@/Redux/Commentslice/commentslice';
+import { AppDispatch, RootState } from '@/lib/Redux/store';
+import { Comment, deleteComment, LikeComment } from '@/lib/Redux/Commentslice/commentslice';
 import { MdDeleteForever } from 'react-icons/md';
 import FetchUser from '../Components/fetchUser';
+import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
+import useDebounce from '@/lib/Hooks/useDebounce';
 
 function Comments({ comment }: { comment: Comment }) {
     const dispatch = useDispatch<AppDispatch>()
     const [isDeleted, setisDeleted] = useState(false)
     const { userdata } = useSelector((state: RootState) => state.auth)
+    const [liked, setliked] = useState(false)
+
+    console.log(comment)
+    useEffect(() => {
+        if (comment.likes.includes(userdata._id)) {
+            setliked(true)
+        }
+    }, [])
 
     const handleDelete = () => {
         dispatch(deleteComment(comment._id))
         setisDeleted(true)
     }
+    const handleLikeComment = () => {
+        dispatch(LikeComment(comment._id))
+        setliked(!liked)
+    }
+    const handleLike = useDebounce(handleLikeComment, 500)
 
     return (
         <div className="relative mb-6 sm:p-6 p-2 bg-gray-800 rounded-lg border border-gray-700">
@@ -35,11 +50,14 @@ function Comments({ comment }: { comment: Comment }) {
                             <div className="comment-container">
                                 <p dangerouslySetInnerHTML={{ __html: comment.text }} />
                             </div>
-                            {(comment.postedby === userdata?._id || userdata?.isAdmin) &&
-                                <div className="mt-4 flex space-x-4 text-gray-400 text-sm">
-                                    <button className="hover:text-red-500 transition-colors duration-150" onClick={handleDelete}><MdDeleteForever className='text-2xl' /></button>
-                                </div>
-                            }
+                            <div className="mt-4 flex text-2xl space-x-4 text-gray-400">
+
+                                {(comment.postedby === userdata?._id || userdata?.isAdmin) &&
+                                    <button className="hover:text-red-500 transition-colors duration-150" onClick={handleDelete}><MdDeleteForever /></button>
+                                }
+                                <button className="hover:text-green-500 transition-colors duration-150" onClick={handleLike}> {liked ? <AiFillLike /> : <AiOutlineLike />}</button>
+
+                            </div>
                         </div>
                     </div>
 

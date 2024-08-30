@@ -11,6 +11,7 @@ export interface Blog {
   created_at: string;
   tags: string[];
   postedby: string;
+  likes?:string[]
 }
 
 interface BlogState {
@@ -59,7 +60,7 @@ export const editBlog = createAsyncThunk<Blog, Partial<Blog>>(
 
     try {
       const response = await axiosInstance.put(
-        `blog/update/${blog._id}`,
+        `blog/${blog._id}`,
         blog,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -67,6 +68,26 @@ export const editBlog = createAsyncThunk<Blog, Partial<Blog>>(
       return response.data;
     } catch (error: any) {
       toast.error("Error editing blog");
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+export const LikeBlog = createAsyncThunk<any, string>(
+  "blogs/Like",
+  async (blogId, thunkAPI) => {
+    const state = thunkAPI.getState() as RootState;
+    const token = getAuthToken(state);
+    const {userdata} =state.auth
+    
+
+    try {
+      const response = await axiosInstance.put(
+        `blog/like/${blogId}`,
+        {likedBy:userdata._id},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      return response.data;
+    } catch (error: any) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -79,7 +100,7 @@ export const deleteBlog = createAsyncThunk<void, string>(
     const token = getAuthToken(state);
 
     try {
-      const response = await axiosInstance.delete(`blog/delete/${_id}`, {
+      const response = await axiosInstance.delete(`blog/${_id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Blog deleted successfully");

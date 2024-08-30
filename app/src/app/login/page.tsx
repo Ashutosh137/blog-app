@@ -5,7 +5,7 @@ import Input from '@/UI/input';
 import React, { FormEvent, useEffect, useState } from 'react';
 import { AppDispatch, RootState } from "@/Redux/store";
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '@/Redux/Authslice/Authslice';
+import { login } from '@/lib/Redux/Authslice/Authslice';
 import Error from '@/UI/Error';
 import { useRouter } from 'next/navigation';
 import Loading from '@/UI/loading';

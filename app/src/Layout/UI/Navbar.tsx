@@ -2,8 +2,8 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from "@/Redux/store";
-import { fetchUser, logout } from '@/Redux/Authslice/Authslice';
+import { AppDispatch, RootState } from "@/lib/Redux/store";
+import { fetchUser, logout } from '@/lib/Redux/Authslice/Authslice';
 import { useRouter } from 'next/navigation';
 import { BiHome, BiLogOut } from 'react-icons/bi';
 import { CgLogIn, CgProfile } from 'react-icons/cg';
@@ -39,8 +39,8 @@ const Navbar: React.FC = () => {
     return (
         <nav className="bg-bgSecondary text-white p-4">
             <div className="container mx-auto p-5 flex justify-between items-center">
-                <div className="text-2xl font-bold">
-                    <Link href="/">Blogup</Link>
+                <div className="text-2xl sm:text-3xl font-serif sm:p-4 font-bold">
+                    <Link href="/">BlogUp</Link>
                 </div>
                 <div className="hidden md:flex space-x-6 items-center">
                     <div className="flex items-center space-x-2 cursor-pointer hover:bg-gray-700 px-3 py-2 rounded" onClick={() => handleNavigation("/")}>

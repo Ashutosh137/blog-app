@@ -1,5 +1,5 @@
 "use client"
-import { Blog, deleteBlog, } from '@/Redux/Blogslice/Blogslice'
+import { Blog, deleteBlog, } from '@/lib/Redux/Blogslice/Blogslice'
 import { AppDispatch, RootState } from '@/Redux/store'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'

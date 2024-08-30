@@ -15,7 +15,7 @@ interface UsersProps {
 const Users: React.FC<UsersProps> = ({ user, size = 'large' }) => {
 
     const renderSmallUI = () => (
-        <div className="flex w-full mr-10 items-center space-x-3 p-3 rounded-lg  shadow-md ">
+        <div className="flex w-full mr-10 items-center space-x-3 p-3 rounded-lg ">
             <Image
                 src={`https://via.placeholder.com/50?text=${user.name}`}
                 alt="Profile Avatar"

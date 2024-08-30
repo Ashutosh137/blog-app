@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import Button from '@/UI/button';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '@/Redux/store';
-import { Comment, createComment, fetchComments } from '@/Redux/Commentslice/commentslice';
+import { AppDispatch, RootState } from '@/lib/Redux/store';
+import { Comment, createComment, fetchComments } from '@/lib/Redux/Commentslice/commentslice';
 import 'react-quill/dist/quill.snow.css';
 import toast from 'react-hot-toast';
 import Comments from '../UI/Comments';

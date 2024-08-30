@@ -3,7 +3,7 @@ import Button from '@/UI/button';
 import Error from '@/UI/Error';
 import Heading from '@/UI/heading';
 import Input from '@/UI/input';
-import { register } from '@/Redux/Authslice/Authslice';
+import { register } from '@/lib/Redux/Authslice/Authslice';
 import { AppDispatch, RootState } from '@/Redux/store';
 import React, { FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

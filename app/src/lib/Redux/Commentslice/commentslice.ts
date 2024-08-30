@@ -16,6 +16,7 @@ export interface Comment {
   postedby: string;
   BlogPost: string;
   created_at: string;
+  likes:string[]
 }
 
 const initialState: CommentState = {
@@ -73,6 +74,25 @@ export const createComment = createAsyncThunk<
     return thunkAPI.rejectWithValue(error.response.data);
   }
 });
+
+export const LikeComment = createAsyncThunk<any, string>(
+  "blogs/Like",
+  async (commentId, thunkAPI) => {
+    const state = thunkAPI.getState() as RootState;
+    const { token, _id } = state.auth.userdata;
+
+    try {
+      const response = await axiosInstance.put(
+        `comment/like/${commentId}`,
+        { likedBy: _id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      return response.data;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
 
 const commentSlice = createSlice({
   name: "comments",

@@ -2,8 +2,8 @@
 import React, { FormEvent, useState } from 'react';
 import Button from '@/UI/button';
 import Heading from '@/UI/heading';
-import { createBlog, editBlog } from '@/Redux/Blogslice/Blogslice';
-import { AppDispatch, RootState } from '@/Redux/store';
+import { createBlog, editBlog } from '@/lib/Redux/Blogslice/Blogslice';
+import { AppDispatch, RootState } from '@/lib/Redux/store';
 import 'react-quill/dist/quill.snow.css';
 import { useDispatch, useSelector } from 'react-redux';
 import "@/assets/blog.css"

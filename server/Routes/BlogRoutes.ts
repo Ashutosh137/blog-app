@@ -10,6 +10,7 @@ import Comments from "../controller/Comment/Comment";
 import Blog from "../models/Blog";
 import User from "../models/user";
 import sendEmail from "../Utilities/SendNewBlogMail";
+import LikeBlog from "../controller/blog/likeBlog";
 
 const BlogRouter = express.Router();
 BlogRouter.get("/", Blogs);
@@ -17,8 +18,9 @@ BlogRouter.get("/:_id", Blog_);
 BlogRouter.get("/:_id/comments", Comments);
 BlogRouter.get("/tag/:tag", Tag);
 BlogRouter.post("/createBlog", VerifyLogin, CreateBlog);
-BlogRouter.put("/update/:_id", VerifyLogin, UpdateBlog);
-BlogRouter.delete("/delete/:_id", VerifyLogin, DeleteBlog);
+BlogRouter.put("/:_id", VerifyLogin, UpdateBlog);
+BlogRouter.put("/like/:_id", VerifyLogin, LikeBlog);
+BlogRouter.delete("/:_id", VerifyLogin, DeleteBlog);
 
 const BlogChanger = Blog.watch();
 BlogChanger.on("change", async (change) => {

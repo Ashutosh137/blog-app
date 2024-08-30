@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Actor } from "next/font/google";
 import "./globals.css";
-import { UseReduxprovider } from "@/Redux/store";
+import { UseReduxprovider } from "@/lib/Redux/store";
 import Navbar from "@/Layout/UI/Navbar";
 import Footer from "@/Layout/UI/footer";
 
