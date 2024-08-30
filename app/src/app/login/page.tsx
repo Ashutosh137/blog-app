@@ -3,7 +3,7 @@ import Button from '@/UI/button';
 import Heading from '@/UI/heading';
 import Input from '@/UI/input';
 import React, { FormEvent, useEffect, useState } from 'react';
-import { AppDispatch, RootState } from "@/Redux/store";
+import { AppDispatch, RootState } from "@/lib/Redux/store";
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '@/lib/Redux/Authslice/Authslice';
 import Error from '@/UI/Error';
