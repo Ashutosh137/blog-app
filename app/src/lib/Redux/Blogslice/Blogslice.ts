@@ -11,7 +11,7 @@ export interface Blog {
   created_at: string;
   tags: string[];
   postedby: string;
-  likes?:string[]
+  likes: string[];
 }
 
 interface BlogState {
@@ -59,11 +59,9 @@ export const editBlog = createAsyncThunk<Blog, Partial<Blog>>(
     const token = getAuthToken(state);
 
     try {
-      const response = await axiosInstance.put(
-        `blog/${blog._id}`,
-        blog,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const response = await axiosInstance.put(`blog/${blog._id}`, blog, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       toast.success("Blog edited successfully");
       return response.data;
     } catch (error: any) {
@@ -77,13 +75,12 @@ export const LikeBlog = createAsyncThunk<any, string>(
   async (blogId, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
     const token = getAuthToken(state);
-    const {userdata} =state.auth
-    
+    const { userdata } = state.auth;
 
     try {
       const response = await axiosInstance.put(
         `blog/like/${blogId}`,
-        {likedBy:userdata._id},
+        { likedBy: userdata._id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       return response.data;
