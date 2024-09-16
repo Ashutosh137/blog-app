@@ -6,12 +6,10 @@ import Users from "../controller/auth/user";
 import Profile from "../controller/auth/profile";
 import UserBlog from "../controller/blog/UserBlogs";
 
-
-
 const AuthRouter = express.Router();
-AuthRouter.get("/user",VerifyLogin,Users)
-AuthRouter.get("/profile/:id",Profile)
-AuthRouter.get("/profile/:id/blogs",UserBlog)
+AuthRouter.get("/user", VerifyLogin, Users);
+AuthRouter.get("/profile/:id", Profile);
+AuthRouter.get("/profile/:id/blogs", UserBlog);
 AuthRouter.post("/register", Register);
 AuthRouter.post("/login", Login);
 

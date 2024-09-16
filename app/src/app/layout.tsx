@@ -9,7 +9,8 @@ const inter = Actor({ subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
   title: "BlogUp : latest blogs on Technology",
-  description: "A modern, responsive blogging platform designed for seamless content creation and sharing. Create, edit, and manage your blogs with an intuitive interface, rich text editor, and advanced features for an enhanced reading and writing experience. Perfect for bloggers, writers, and content creators.",
+  description:
+    "A modern, responsive blogging platform designed for seamless content creation and sharing. Create, edit, and manage your blogs with an intuitive interface, rich text editor, and advanced features for an enhanced reading and writing experience. Perfect for bloggers, writers, and content creators.",
 };
 
 export default function RootLayout({
@@ -22,9 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <UseReduxprovider>
           <Navbar />
-          <div className="bg-bgSecondary max-w-5xl mx-auto">
-            {children}
-          </div>
+          <div className="bg-bgSecondary max-w-5xl mx-auto">{children}</div>
           <Footer />
         </UseReduxprovider>
       </body>

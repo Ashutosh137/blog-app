@@ -11,7 +11,7 @@ const VerifyLogin = async (req: Request, res: Response, next: NextFunction) => {
 
     if (!user) return res.status(401).json({ message: "User login failed" });
 
-    (req as any).user = user ;
+    (req as any).user = user;
 
     next();
   } catch (error) {

@@ -6,7 +6,7 @@ const BlogSchema = new Schema({
   created_at: { type: Date, default: Date.now },
   tags: { type: [String], default: [] },
   title: { type: String, required: true },
-  likes: { type: [Schema.Types.ObjectId], ref: "User", default: [] }, 
+  likes: { type: [Schema.Types.ObjectId], ref: "User", default: [] },
 });
 
 BlogSchema.index({ postedby: 1 }, { unique: false });

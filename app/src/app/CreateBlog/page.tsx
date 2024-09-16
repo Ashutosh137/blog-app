@@ -1,13 +1,11 @@
-import CreateBlog from '@/Layout/Components/CreateBlog'
-import { Metadata } from 'next'
+import CreateBlog from "@/Layout/Components/CreateBlog";
+import { Metadata } from "next";
 export const metadata: Metadata = {
-    title: "CrateBlog || blogup",
-    description: "build with blgup , share your stories",
+  title: "CrateBlog || blogup",
+  description: "build with blgup , share your stories",
 };
 function Page() {
-    return (
-        <CreateBlog />
-    )
+  return <CreateBlog />;
 }
 
-export default Page
+export default Page;

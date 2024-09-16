@@ -1,7 +1,6 @@
-
 ### Blog app
 
-```markdown
+````markdown
 # Blog App
 
 This is a modern blog application built with Next.js 14 and TypeScript on the frontend and Express with Mongoose on the backend. The application allows users to create, read, update, and delete blog posts, manage comments, and features secure user authentication using JWT.
@@ -24,6 +23,7 @@ blog-app/
 ├── docker-compose.yml  # Docker Compose for multi-container setup
 └── .github/workflows/  # CI/CD pipeline with GitHub Actions
 ```
+````
 
 ## Running the Application
 
@@ -32,12 +32,14 @@ blog-app/
 To run the application locally:
 
 1. **Start the backend server:**
+
    ```bash
    cd server
    npm run dev
    ```
 
 2. **Start the frontend app:**
+
    ```bash
    cd ../app
    npm run dev
@@ -67,7 +69,7 @@ The frontend of the Blog App is built with Next.js 14 and TypeScript. It feature
 
 ```plaintext
 app/                # Frontend (Next.js 14 + TypeScript)
-├── Layout/         # Reusable components and layouts 
+├── Layout/         # Reusable components and layouts
 ├── assets/         #  CSS styles
 ├── ui/             # UI elements like buttons, form controls, etc.
 ```
@@ -182,8 +184,10 @@ PORT=4000
 - **Mongoose ORM**: Structured data models for MongoDB.
 - **RESTful API**: Standardized endpoints for easy frontend integration.
 - **Comment Management**: CRUD operations for comments on blog posts.
+
 ```
 
 ---
 
 This `README.md` file now accurately reflects the correct API endpoint paths such as `/blogs`, `/comments`, and `/auth`. It also includes instructions for running both the frontend and backend, project structure details, and descriptions of key features.
+```

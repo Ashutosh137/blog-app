@@ -9,7 +9,7 @@ const paramsSchema = yup.object().shape({
     .string()
     .required("ID is required")
     .test("is-mongo-objectid", "Invalid ID format", (value) =>
-      mongoose.Types.ObjectId.isValid(value)
+      mongoose.Types.ObjectId.isValid(value),
     ),
 });
 
@@ -18,7 +18,7 @@ const bodySchema = yup.object().shape({
     .string()
     .required("User ID is required")
     .test("is-mongo-objectid", "Invalid ID format", (value) =>
-      mongoose.Types.ObjectId.isValid(value)
+      mongoose.Types.ObjectId.isValid(value),
     ),
 });
 
@@ -46,7 +46,7 @@ const LikeComment = async (req: Request, res: Response) => {
       updateOperation,
       {
         new: true,
-      }
+      },
     );
 
     console.log(updatedcomment, comment);

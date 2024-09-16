@@ -8,7 +8,7 @@ const paramsSchema = yup.object().shape({
     .string()
     .required("ID is required")
     .test("is-mongo-objectid", "Invalid ID format", (value) =>
-      mongoose.Types.ObjectId.isValid(value)
+      mongoose.Types.ObjectId.isValid(value),
     ),
 });
 
@@ -28,7 +28,7 @@ const UpdateBlog = async (req: Request, res: Response) => {
     const blogPost = await Blog.findByIdAndUpdate(
       _id,
       { content, tags, title, created_at: new Date() },
-      { new: true }
+      { new: true },
     );
 
     if (!blogPost) {

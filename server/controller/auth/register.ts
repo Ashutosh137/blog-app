@@ -28,7 +28,7 @@ const Register = async (req: Request, res: Response) => {
       name,
       password: hashedPass,
       signin: "email",
-      token:""
+      token: "",
     });
 
     await user.save();

@@ -8,7 +8,7 @@ const paramsSchema = yup.object().shape({
     .string()
     .required("userID is required as params")
     .test("is-mongo-objectid", "Invalid Blog ID format", (value) =>
-      mongoose.Types.ObjectId.isValid(value)
+      mongoose.Types.ObjectId.isValid(value),
     ),
 });
 
@@ -25,7 +25,10 @@ const Comments = async (req: Request, res: Response) => {
     if (!blogPostComments.length) {
       return res
         .status(200)
-        .json({ message: "No comments found for this blog post", comments: [] });
+        .json({
+          message: "No comments found for this blog post",
+          comments: [],
+        });
     }
 
     return res.status(200).json({ comments: blogPostComments });

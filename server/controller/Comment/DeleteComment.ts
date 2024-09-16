@@ -8,7 +8,7 @@ const bodySchema = yup.object().shape({
     .string()
     .required("Comment ID is required")
     .test("is-mongo-objectid", "Invalid Comment ID format", (value) =>
-      mongoose.Types.ObjectId.isValid(value)
+      mongoose.Types.ObjectId.isValid(value),
     ),
 });
 

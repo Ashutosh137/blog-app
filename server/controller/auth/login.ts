@@ -30,7 +30,7 @@ const Login = async (req: Request, res: Response) => {
       process.env.JWT_SECRET || "123",
       {
         expiresIn: "3d",
-      }
+      },
     );
 
     user.token = token;

@@ -23,7 +23,7 @@ export const login = createAsyncThunk(
   "auth/login",
   async (
     { email, password }: { email: string; password: string },
-    thunkAPI
+    thunkAPI,
   ) => {
     try {
       const response = await axiosInstance.post(`auth/login`, {
@@ -36,10 +36,10 @@ export const login = createAsyncThunk(
       return { token, user };
     } catch (error: any) {
       return thunkAPI.rejectWithValue(
-        error.response.data.error || error.response.data.message
+        error.response.data.error || error.response.data.message,
       );
     }
-  }
+  },
 );
 
 export const register = createAsyncThunk(
@@ -50,7 +50,7 @@ export const register = createAsyncThunk(
       password,
       name,
     }: { email: string; password: string; name: string },
-    thunkAPI
+    thunkAPI,
   ) => {
     try {
       const response = await axiosInstance.post(`auth/register`, {
@@ -67,7 +67,7 @@ export const register = createAsyncThunk(
       console.log(error);
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 
 export const fetchUser = createAsyncThunk(
@@ -84,10 +84,10 @@ export const fetchUser = createAsyncThunk(
       return response.data.user;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(
-        error.response.data.error || error.response.data.message
+        error.response.data.error || error.response.data.message,
       );
     }
-  }
+  },
 );
 
 const authSlice = createSlice({

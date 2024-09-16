@@ -16,7 +16,7 @@ export interface Comment {
   postedby: string;
   BlogPost: string;
   created_at: string;
-  likes:string[]
+  likes: string[];
 }
 
 const initialState: CommentState = {
@@ -66,7 +66,7 @@ export const createComment = createAsyncThunk<
     const response = await axiosInstance.post(
       `/comment/create`,
       { content, BlogPost: blogId, postedBy: _id },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { headers: { Authorization: `Bearer ${token}` } },
     );
     toast.success("Comment added successfully");
     return response.data.comment;
@@ -85,13 +85,13 @@ export const LikeComment = createAsyncThunk<any, string>(
       const response = await axiosInstance.put(
         `comment/like/${commentId}`,
         { likedBy: _id },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${token}` } },
       );
       return response.data;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
-  }
+  },
 );
 
 const commentSlice = createSlice({

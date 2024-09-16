@@ -8,13 +8,13 @@ const bodySchema = yup.object().shape({
     .string()
     .required("Blog ID is required")
     .test("is-mongo-objectid", "Invalid Blog ID format", (value) =>
-      mongoose.Types.ObjectId.isValid(value)
+      mongoose.Types.ObjectId.isValid(value),
     ),
   BlogPost: yup
     .string()
     .required("Blog ID is required")
     .test("is-mongo-objectid", "Invalid Blog ID format", (value) =>
-      mongoose.Types.ObjectId.isValid(value)
+      mongoose.Types.ObjectId.isValid(value),
     ),
   content: yup.string().required("Content is required"),
 });
@@ -29,7 +29,7 @@ const CreateComment = async (req: Request, res: Response) => {
       postedby: new mongoose.Types.ObjectId(postedBy as string),
       text: content,
       created_at: new Date(),
-      BlogPost :new mongoose.Types.ObjectId(BlogPost as string),
+      BlogPost: new mongoose.Types.ObjectId(BlogPost as string),
     });
 
     return res

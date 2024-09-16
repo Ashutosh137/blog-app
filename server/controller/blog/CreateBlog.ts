@@ -9,7 +9,7 @@ const blogSchema = yup.object().shape({
     .string()
     .required("Posted by is required")
     .test("is-mongo-objectid", "Invalid ObjectId", (value) =>
-      mongoose.Types.ObjectId.isValid(value)
+      mongoose.Types.ObjectId.isValid(value),
     ),
   content: yup.string().required("Content is required"),
   title: yup.string().required("Title is required"),

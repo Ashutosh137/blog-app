@@ -6,7 +6,7 @@ body {
   color: white;
   background-color: #182233;
 }
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
   display: none;
 }
 .textnone {

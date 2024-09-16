@@ -41,7 +41,7 @@ export const createBlog = createAsyncThunk<Blog, Partial<Blog>>(
       const response = await axiosInstance.post(
         `blog/createBlog`,
         { postedby, ...newBlog },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${token}` } },
       );
       toast.success("Blog created successfully");
       return response.data.blogPost;
@@ -49,7 +49,7 @@ export const createBlog = createAsyncThunk<Blog, Partial<Blog>>(
       toast.error("Error creating blog");
       return thunkAPI.rejectWithValue(error.response.data);
     }
-  }
+  },
 );
 
 export const editBlog = createAsyncThunk<Blog, Partial<Blog>>(
@@ -68,7 +68,7 @@ export const editBlog = createAsyncThunk<Blog, Partial<Blog>>(
       toast.error("Error editing blog");
       return thunkAPI.rejectWithValue(error.response.data);
     }
-  }
+  },
 );
 export const LikeBlog = createAsyncThunk<any, string>(
   "blogs/Like",
@@ -81,13 +81,13 @@ export const LikeBlog = createAsyncThunk<any, string>(
       const response = await axiosInstance.put(
         `blog/like/${blogId}`,
         { likedBy: userdata._id },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${token}` } },
       );
       return response.data;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
-  }
+  },
 );
 
 export const deleteBlog = createAsyncThunk<void, string>(
@@ -105,7 +105,7 @@ export const deleteBlog = createAsyncThunk<void, string>(
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
-  }
+  },
 );
 
 const blogSlice = createSlice({
@@ -128,7 +128,7 @@ const blogSlice = createSlice({
       .addCase(deleteBlog.fulfilled, (state, action: any) => {
         state.status = "succeeded";
         state.blogs = state.blogs.filter(
-          (blog) => blog._id !== action.payload._id
+          (blog) => blog._id !== action.payload._id,
         );
       });
   },
